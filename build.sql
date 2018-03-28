@@ -14,6 +14,6 @@ create table import.master_plan(
   description text
 );
 
-COPY master_plan
+COPY import.master_plan
 FROM '/home/aguirao/Desarrollo/a-curious-moon-exercises/code_and_data/data/master_plan.csv'
 WITH DELIMITER ',' HEADER CSV;
