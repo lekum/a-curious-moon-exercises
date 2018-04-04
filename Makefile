@@ -9,10 +9,9 @@ all: normalize
 	psql $(DB) -f $(BUILD)
 master:
 	@cat $(MASTER) >> $(BUILD)
-	import: master
-	@echo "COPY import.master_plan FROM
-	$(CSV) WITH DELIMITER ',' HEADER CSV;" >> $(BUILD)
-	normalize: import
+import: master
+	@echo "COPY import.master_plan FROM $(CSV) WITH DELIMITER ',' HEADER CSV;" >> $(BUILD)
+normalize: import
 	@cat $(NORMALIZE) >> $(BUILD)
 clean:
 	@rm -rf $(BUILD)
