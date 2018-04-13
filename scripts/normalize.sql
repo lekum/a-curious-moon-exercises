@@ -74,7 +74,7 @@ insert into events(
 	spass_type_id
 )
 select
-	import.master_plan.start_time_utc::timestamptz at time zone 'UTC',
+	import.master_plan.start_time_utc::timestamp,
 	import.master_plan.title,
 	import.master_plan.description,
 	event_types.id as event_type_id,
@@ -85,11 +85,11 @@ select
 from import.master_plan
 inner join event_types
   on event_types.description = import.master_plan.library_definition
-inner join targets
+left join targets
   on targets.description = import.master_plan.target
-inner join teams
+left join teams
   on teams.description = import.master_plan.team
-inner join requests
+left join requests
   on requests.description = import.master_plan.request_name
-inner join spass_types
+left join spass_types
   on spass_types.description = import.master_plan.spass_type;
